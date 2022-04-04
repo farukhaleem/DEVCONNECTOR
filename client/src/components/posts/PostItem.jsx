@@ -11,20 +11,22 @@ const PostItem = ({
   deletePost,
   auth,
   post: { _id, text, name, avatar, user, likes, comments, date },
+  showActions
 }) => {
   return (
     <div className="post bg-white p-1 my-1">
       <div>
-        <a href="profile.html">
+        <Link to={`/profile/${user}`}>
           <img className="round-img" src={avatar} alt="" />
           <h4>{name}</h4>
-        </a>
+        </Link>
       </div>
       <div>
         <p className="my-1">{text}</p>
         <p className="post-date">
           Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
         </p>
+        { showActions && <>
         <button onClick={e => addLike(_id)} type="button" className="btn btn-light">
           <i className="fas fa-thumbs-up"></i>{" "}
           {likes && likes.length > 0 && <span>{likes.length}</span>}
@@ -43,11 +45,16 @@ const PostItem = ({
             <i className="fas fa-times"></i>
           </button>
         )}
+        </> }
       </div>
     </div>
   );
 };
 
+PostItem.defaultProps = {
+  showActions: true,
+}
+ 
 PostItem.propTypes = {
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
