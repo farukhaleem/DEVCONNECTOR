@@ -208,7 +208,7 @@ router.put(
 // @route   POST api/posts/comment/postId
 // @desc    Comment on a post
 // @access  Private
-router.put(
+router.post(
   '/comment/:id',
   [ 
     auth,
